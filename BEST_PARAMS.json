@@ -1,0 +1,250 @@
+{
+  "himmelblau": {
+    "RayShootingOptimizer": {
+      "params": {
+        "ascent_steps": 200,
+        "distance_threshold": 0.2,
+        "lr": 0.01,
+        "max_grad_norm": 1.0,
+        "max_param_step_norm": 0.1,
+        "num_rays": 32,
+        "ray_step_size": 0.05,
+        "use_momentum": true
+      },
+      "final_value": -0.0007163265254348516,
+      "duration": 12.30547547340393
+    },
+    "SGDOptimizer": {
+      "params": {
+        "lr": 0.005,
+        "momentum": 0.0,
+        "steps": 200
+      },
+      "final_value": -0.0,
+      "duration": 0.045545339584350586
+    },
+    "AdamOptimizer": {
+      "params": {
+        "beta1": 0.9,
+        "lr": 0.02,
+        "steps": 400
+      },
+      "final_value": -2.1946024894714355,
+      "duration": 0.18660521507263184
+    }
+  },
+  "rastrigin_2d": {
+    "RayShootingOptimizer": {
+      "params": {
+        "ascent_steps": 200,
+        "distance_threshold": 0.2,
+        "lr": 0.01,
+        "max_grad_norm": 1.0,
+        "max_param_step_norm": 0.1,
+        "num_rays": 16,
+        "ray_step_size": 0.08,
+        "use_momentum": true
+      },
+      "final_value": -0.061489105224609375,
+      "duration": 6.559731960296631
+    },
+    "SGDOptimizer": {
+      "params": {
+        "lr": 0.01,
+        "momentum": 0.8,
+        "steps": 200
+      },
+      "final_value": -15.110555648803711,
+      "duration": 0.1629331111907959
+    },
+    "AdamOptimizer": {
+      "params": {
+        "beta1": 0.9,
+        "lr": 0.01,
+        "steps": 200
+      },
+      "final_value": -64.67122650146484,
+      "duration": 0.19508075714111328
+    }
+  },
+  "six_hump_camel": {
+    "RayShootingOptimizer": {
+      "params": {
+        "ascent_steps": 200,
+        "distance_threshold": 0.2,
+        "lr": 0.01,
+        "max_grad_norm": 3.0,
+        "max_param_step_norm": 0.1,
+        "num_rays": 16,
+        "ray_step_size": 1.5,
+        "use_momentum": true
+      },
+      "final_value": 1.0316280126571655,
+      "duration": 8.272770643234253
+    },
+    "SGDOptimizer": null,
+    "AdamOptimizer": {
+      "params": {
+        "beta1": 0.9,
+        "lr": 0.02,
+        "steps": 400
+      },
+      "final_value": -212.57177734375,
+      "duration": 0.6453208923339844
+    }
+  },
+  "ackley": {
+    "RayShootingOptimizer": {
+      "params": {
+        "ascent_steps": 500,
+        "distance_threshold": 0.5,
+        "lr": 0.001,
+        "max_grad_norm": 1.0,
+        "max_param_step_norm": 0.1,
+        "num_rays": 16,
+        "ray_step_size": 0.5,
+        "use_momentum": true
+      },
+      "final_value": -13.647322654724121,
+      "duration": 16.78575873374939
+    },
+    "SGDOptimizer": {
+      "params": {
+        "lr": 0.005,
+        "momentum": 0.0,
+        "steps": 200
+      },
+      "final_value": -13.597084999084473,
+      "duration": 0.2799201011657715
+    },
+    "AdamOptimizer": {
+      "params": {
+        "beta1": 0.9,
+        "lr": 0.005,
+        "steps": 200
+      },
+      "final_value": -13.597084999084473,
+      "duration": 0.3646261692047119
+    }
+  },
+  "sphere": {
+    "RayShootingOptimizer": {
+      "params": {
+        "ascent_steps": 500,
+        "distance_threshold": 0.2,
+        "lr": 0.01,
+        "max_grad_norm": 1.0,
+        "max_param_step_norm": 0.1,
+        "num_rays": 16,
+        "ray_step_size": 0.05,
+        "use_momentum": true
+      },
+      "final_value": -6.090858164498059e-07,
+      "duration": 2.6359386444091797
+    },
+    "SGDOptimizer": {
+      "params": {
+        "lr": 0.01,
+        "momentum": 0.8,
+        "steps": 400
+      },
+      "final_value": -1.3242923492953897e-38,
+      "duration": 0.22711920738220215
+    },
+    "AdamOptimizer": {
+      "params": {
+        "beta1": 0.9,
+        "lr": 0.02,
+        "steps": 400
+      },
+      "final_value": -1.3992750644683838,
+      "duration": 0.21835875511169434
+    }
+  },
+  "rosenbrock": {
+    "RayShootingOptimizer": {
+      "params": {
+        "ascent_steps": 200,
+        "distance_threshold": 0.2,
+        "lr": 0.01,
+        "max_grad_norm": 1.0,
+        "max_param_step_norm": 0.5,
+        "num_rays": 16,
+        "ray_step_size": 0.08,
+        "use_momentum": true
+      },
+      "final_value": -0.10469763725996017,
+      "duration": 8.428120374679565
+    },
+    "SGDOptimizer": null,
+    "AdamOptimizer": {
+      "params": {
+        "beta1": 0.9,
+        "lr": 0.02,
+        "steps": 400
+      },
+      "final_value": -1152.572998046875,
+      "duration": 0.3679831027984619
+    }
+  },
+  "goldstein_price": {
+    "RayShootingOptimizer": {
+      "params": {
+        "ascent_steps": 200,
+        "distance_threshold": 0.2,
+        "lr": 0.01,
+        "max_grad_norm": 1.0,
+        "max_param_step_norm": 0.1,
+        "num_rays": 16,
+        "ray_step_size": 0.08,
+        "use_momentum": true
+      },
+      "final_value": -3.003995895385742,
+      "duration": 16.027186155319214
+    },
+    "SGDOptimizer": null,
+    "AdamOptimizer": {
+      "params": {
+        "beta1": 0.9,
+        "lr": 0.02,
+        "steps": 400
+      },
+      "final_value": -434121.75,
+      "duration": 0.7214193344116211
+    }
+  },
+  "three_minima": {
+    "RayShootingOptimizer": {
+      "params": {
+        "ascent_steps": 200,
+        "distance_threshold": 0.2,
+        "lr": 0.01,
+        "max_grad_norm": 1.0,
+        "max_param_step_norm": 0.1,
+        "num_rays": 16,
+        "ray_step_size": 0.08,
+        "use_momentum": true
+      },
+      "final_value": -8.328352123498917e-06,
+      "duration": 2.6465795040130615
+    },
+    "SGDOptimizer": {
+      "params": {
+        "lr": 0.05,
+        "momentum": 0.8,
+        "steps": 400
+      },
+      "final_value": -0.0003196764155291021,
+      "duration": 0.534778356552124
+    },
+    "AdamOptimizer": {
+      "params": {
+        "beta1": 0.9,
+        "lr": 0.02,
+        "steps": 400
+      },
+      "final_value": -1.3127017837177846e-06,
+      "duration": 0.8810825347900391
+    }
+  }
+}
