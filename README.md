@@ -6,11 +6,11 @@ A gradient-based global optimizer that escapes local maxima on multimodal loss s
 
 ## The Problem
 
-Adam and SGD are local optimizers. They follow the gradient from wherever they start and converge to the nearest basin. On multimodal surfaces with many peaks, they get stuck regardless of how well their hyperparameters are tuned. This is a structural limitation, not a tuning problem.
+Adam and SGD are local optimizers. They follow the gradient from wherever they start and converge to the nearest basin. On multimodal surfaces with many peaks, they get stuck regardless of how well their hyperparameters are tuned.
 
 ## The Idea
 
-After climbing to a local maximum via gradient ascent, RSO fires rays outward in evenly-spaced directions. Each ray walks forward until it finds a region meaningfully higher than the current position. Gradient ascent then runs from the top-k landing points by value. This cycle repeats until no improvement is found or a maximum iteration count is reached.
+Imagine you're a climber trying to reach the highest peak in a mountain range. One way you could try and find the highest peak is as follows: Start at the base of a random mountain and climb it. Once you're at the top look around, do you see taller mountains? If yes make a note for each. Then, if those mountains are at least 5% higher than the one you were standing on, climb up them and whichever is tallest is the one you'll pick. Granted this is a lot of work for you as a climber but given enough time you will eventually find the highest mountain. This is the idea of this optimizer, although of course the analogy could use some work in certain areas. A quick side note, the optimizer conducts gradient **ascent** on the **negative** version of a loss surface. This is done purely so I can keep the analogy of the mountain climber looking around and no other reason, since solving for the maximum of a negative loss surface is equivalent to minimizing a normal loss surface. The optimizer starts in a random area and, after climbing to a local maximum via gradient **ascent**, RSO fires rays outward in evenly spaced directions. Each ray walks forward until it finds a region meaningfully higher than the current position. Gradient ascent then runs from the top-k landing points by value. This cycle repeats until no meaningful improvement is found or a maximum iteration count is reached.
 
 ```
 Climb → Scout → Climb from best landings → repeat
@@ -81,7 +81,7 @@ Gradient ascent runs from each landing point. If any candidate beats the current
 
 ## Known Limitation: Bukin N.6
 
-Bukin N.6 has a narrow parabolic ridge. RSO's rays travel in straight lines, so they cross the curved ridge briefly and continue off it. Landing points end up on the slope rather than the ridge crest, and subsequent ascent climbs to mediocre local points. Straight-line ray shooting is structurally ill-suited to curved manifold optima. The domain is also highly asymmetric (`x1 ∈ [-15, -5]`, `x2 ∈ [-3, 3]`), so most uniform rays immediately walk into out-of-domain regions.
+Bukin N.6 has a narrow parabolic ridge. RSO's rays travel in straight lines, so they cross the curved ridge briefly and continue off it. Landing points end up on the slope rather than the ridge crest, and subsequent ascent climbs to mediocre local points. Straight-line ray shooting is structurally ill-suited for this. The domain is also highly asymmetric (`x1 ∈ [-15, -5]`, `x2 ∈ [-3, 3]`), so most uniform rays immediately walk into out of domain regions.
 
 ---
 
@@ -131,7 +131,7 @@ print(f"Best point: {best_point}")
 print(f"Best value: {best_value:.5f}")
 ```
 
-If `f_batch` is not provided, RSO falls back to a sequential loop over `f` — correct but slower.
+If `f_batch` is not provided, RSO falls back to a sequential loop over `f` — it works but is slower.
 
 ---
 
@@ -140,11 +140,11 @@ If `f_batch` is not provided, RSO falls back to a sequential loop over `f` — c
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `lr` | Learning rate for gradient ascent | `0.01` |
-| `ascent_steps` | Max gradient ascent steps per climb | `200` |
+| `ascent_steps` | Gradient ascent steps per climb | `200` |
 | `num_rays` | Number of rays fired per iteration | `38` |
 | `ray_step_size` | Step size along each ray direction | `0.05` |
 | `ray_max_steps` | Max walk steps per ray | `200` |
-| `top_k_landings` | Only climb from the top-k landing points | `5` |
+| `top_k_landings` | Only climb from the top-k highest landing points | `5` |
 | `max_iterations` | Max climb → scout → climb cycles | `6` |
 | `epsilon` | Min value improvement to keep iterating | `1e-4` |
 | `max_param_step_norm` | Clips parameter update norm each step | `0.001` |
@@ -160,25 +160,15 @@ The most impactful parameters for a new surface are `ray_step_size` (should be o
 ```
 ├── optimizer.py          # RayShootingOptimizer implementation
 ├── demo.ipynb            # Benchmarking notebook (single-run + Monte Carlo)
-└── assets/
+└── images/
     ├── single_run_comparison.png
     └── monte_carlo_comparison.png
 ```
 
 ---
 
-## Relation to Existing Work
-
-RSO is structurally related to basin-hopping (Wales & Doye, 1997), which combines local optimization with structured perturbations to escape local minima. The ray-shooting phase implicitly probes the geometry of the loss surface via linear interpolation, connecting to loss landscape characterization work (Li et al., 2018; Goodfellow et al., 2015). The key distinction is that RSO uses directional geometric search rather than random perturbations, and integrates vectorized batched evaluation for competitive runtime.
-
----
 
 ## Limitations and Future Work
 
 - Ray directions are fixed to the first two dimensions of the parameter space. For high-dimensional problems (d >> 2), directions should be sampled randomly in the full space rather than projected onto a 2D plane.
-- The landing threshold assumes the surface is not heavily negative-valued near the start. The threshold `f_start + |f_start| * 0.05 + 1e-3` handles this more robustly than a simple percentage.
-- A natural extension is Hessian-informed ray directions — concentrating exploration where curvature suggests the surface is most likely to rise, rather than uniform angular spacing.
-
----
-
-*Undergraduate research project. Benchmarks run on standard 2D test functions; scaling behavior in higher dimensions is an open question.*
+- A good extension is to use Hessian-informed ray directions, concentrating exploration where curvature suggests the surface is most likely to rise, rather than uniform angular spacing.
