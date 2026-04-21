@@ -22,7 +22,13 @@ Ray shooting is vectorized: all active ray positions at each walk step are evalu
 
 ## Results
 
-Monte Carlo benchmark: 30 random starts uniformly distributed across each surface's domain. **Mean gap** is the primary metric (distance from the global optimum — lower is better).
+For a single run through the different benchmarks:
+![Single run comparison](assets/single_run_comparison.png)
+
+
+Then, the Monte Carlo benchmark: 30 random starts uniformly distributed across each surface's domain. **Mean gap** is the primary metric (distance from the global optimum — lower is better).
+
+![Monte Carlo comparison](assets/monte_carlo_comparison.png)
 
 ### Ackley
 | Method | Mean Gap | Std | Mean Time |
